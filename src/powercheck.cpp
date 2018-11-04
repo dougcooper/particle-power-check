@@ -11,8 +11,9 @@ void PowerCheck::setup() {
 	// Call this from setup() instead.
 
 	// BATT_INT_PC13
-	attachInterrupt(LOW_BAT_UC, &PowerCheck::interruptHandler, this, FALLING);
-}
+#if PLATFORM_ID == 10
+    attachInterrupt(LOW_BAT_UC, &PowerCheck::interruptHandler, this, FALLING);
+#endif}
 
 bool PowerCheck::getHasPower() {
 	// Bit 2 (mask 0x4) == PG_STAT. If non-zero, power is good
